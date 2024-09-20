@@ -6,7 +6,7 @@ sudo apt update -y && sudo apt upgrade -y
 # Install required packages
 sudo apt install -y \
     openvpn \
-    netfilter-persistent \
+    iptables \
     dnsmasq \
     dhcpcd5
 
@@ -30,12 +30,3 @@ sudo systemctl restart openvpn
 sudo systemctl enable dhcpcd
 sudo systemctl restart dnsmasq
 sudo systemctl restart dhcpcd
-
-# Connect to VPN
-sudo openvpn --config /etc/openvpn/vpn.ovpn & \
-    sleep 30 & \
-    curl ipinfo.io
-
-# iptables configuration
-sudo ./iptables.sh
-sudo netfilter-persistent save
